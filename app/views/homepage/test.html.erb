@@ -1,0 +1,44 @@
+<% urls = [
+  "http://transito.gtrans.com.br/cttupe/index.php/portal/getImg/192.168.10.114/",
+  "http://transito.gtrans.com.br/cttupe/index.php/portal/getImg/172.10.3.121/",
+  "http://transito.gtrans.com.br/cttupe/index.php/portal/getImg/172.10.3.122/",
+  "http://transito.gtrans.com.br/cttupe/index.php/portal/getImg/172.10.2.160/",
+  "http://transito.gtrans.com.br/cttupe/index.php/portal/getImg/192.168.10.108/",
+  "http://transito.gtrans.com.br/cttupe/index.php/portal/getImg/192.168.10.119/"
+] %>
+
+<script type="text/javascript">
+  function loadImages() {
+    var imgDivs = document.getElementsByClassName("box-camera");
+    for (var i=0; i<imgDivs.length; i++) {
+      var loadingImg = new Image();
+      var downloadingImage = new Image();
+      loadingImg.className = "loadingImg";
+      // loadingImg.src = "http://www.urquiza.org/loading.gif";
+      loadingImg.src = "<%= asset_path 'loading.gif' %>";
+      imgDivs[i].insertAdjacentElement("afterbegin", loadingImg);
+      downloadingImage.changingDiv = imgDivs[i];
+
+      downloadingImage.onload = function () {
+        this.changingDiv.innerHTML = "";
+        this.changingDiv.append(this);
+      };
+
+      downloadingImage.src = imgDivs[i].dataset.camera_url;
+    }
+  }
+  window.onload = function() {
+    loadImages();
+    setInterval(loadImages,5*60*1000);
+  }
+</script>
+
+<div class="container">
+  <div class="row">
+    <% urls.each do |image| %>
+      <div class="col-md-6 box-camera" data-camera_url="<%= image %>">
+        <%= image_tag 'black.png' %> 
+      </div>
+    <% end %>
+  </div>
+</div>
