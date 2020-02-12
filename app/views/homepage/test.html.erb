@@ -33,12 +33,10 @@
   }
 </script>
 
-<div class="container">
-  <div class="row">
-    <% urls.each do |image| %>
-      <div class="col-md-6 box-camera" data-camera_url="<%= image %>">
-        <%= image_tag 'black.png' %> 
-      </div>
-    <% end %>
-  </div>
+<div class="row">
+  <% urls.each do |image| %>
+    <div class="col-md-6 box-camera" data-camera_url="<%= image %>">
+      <%= image_tag 'black.png' %>
+    </div>
+  <% end %>
 </div>
