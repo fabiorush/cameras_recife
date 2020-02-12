@@ -3,7 +3,7 @@ class HomepageController < ApplicationController
 
   def index
     if user_signed_in?
-      redirect_to test_path
+      redirect_to cameras_path
     end
   end
 
