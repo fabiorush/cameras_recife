@@ -261,7 +261,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :google_oauth2, '894376171021-el9tkb8edfg0mlctshf0erillhrlikls.apps.googleusercontent.com', 'VBWArHBqHDWuId5uZJjFTaLd', {
-    scope: "contacts.readonly,userinfo.email"
+    scope: "userinfo.email, userinfo.profile"
   }
 
   # ==> Warden configuration
