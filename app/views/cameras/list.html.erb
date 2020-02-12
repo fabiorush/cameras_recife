@@ -1,0 +1,34 @@
+<h1 align="center">Camera list</h1>
+<div class="row">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td colspan="3"><h4 align="center">Your tracked cameras</h4></td>
+        </tr>
+      <% @cameras_user.each do |camera| %>
+        <tr>
+          <td><%= camera.name %></td>
+          <td><%= "Latitude: #{camera.latitude}, Longitude: #{camera.longitude}" %></td>
+          <td><%= link_to 'Delete', camera_path(camera), class: "btn btn-danger btn-camera", method: :delete %></td>
+        </tr>
+      <% end %>
+        <tr>
+          <td colspan="3"><h4 align="center">List of all cameras</h4></td>
+        </tr>
+      <% @cameras_other.each do |camera| %>
+        <tr>
+          <td><%= camera.name %></td>
+          <td><%= "Latitude: #{camera.latitude}, Longitude: #{camera.longitude}" %></td>
+          <td><%= link_to 'Add', cameras_path(camera_id: camera), class: "btn btn-primary btn-camera", method: :post %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

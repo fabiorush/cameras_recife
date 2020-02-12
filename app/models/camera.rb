@@ -8,7 +8,7 @@ class Camera < ApplicationRecord
 
   def self.download_camera_list
     Net::HTTP.get("transito.gtrans.com.br","/cttupe/index.php/mapa").split("\n").map do |str|
-      match = str.match(/criaPonto\((.+) +,(.+) +,'(.+)',.+span style.+\/b>(.+)<\//)
+      match = str.match(/criaPonto\((.+) +,(.+) +,'(.+)',.+span style.+\/b>([^<]+)</)
       if match.nil?
         nil
       else
@@ -19,6 +19,7 @@ class Camera < ApplicationRecord
   end
 
   def self.populate_database
+    UserCamera.destroy_all
     destroy_all
     download_camera_list.each do |camera|
       create(camera)
