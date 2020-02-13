@@ -14,8 +14,9 @@ class CamerasController < ApplicationController
   end
 
   def map
-    @cameras_user = current_user.cameras
-    @cameras_other = Camera.all.select { |camera| !camera.users.find_by(id: current_user.id) }
+    @cameras = Camera.all
+    # @cameras_user = current_user.cameras
+    # @cameras_other = Camera.all.select { |camera| !camera.users.find_by(id: current_user.id) }
   end
 
   def create

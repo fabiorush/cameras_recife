@@ -5,8 +5,21 @@
       var map;
       function initMap() {
         var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 10, center: {lat: -8.0574874, lng: -34.890126}});
-        // var marker = new google.maps.Marker({position: camera_position, map: map});
+            document.getElementById('map'), {zoom: 13, center: {lat: -8.0744874, lng: -34.890126}});
+        var currentInfoWindow;
+        <% @cameras.each do |camera| %>
+          var marker<%= camera.id %> = new google.maps.Marker({position: {lat: <%= camera.latitude %>, lng: <%= camera.longitude %>}, map: map, title: "<%= camera.name %>"});
+          var infoWindow<%= camera.id %> = new google.maps.InfoWindow({
+              content: "<p><%= camera.name %></p>"
+          });
+          marker<%= camera.id %>.addListener('click', function () {
+            if (currentInfoWindow) {
+              currentInfoWindow.close()
+            }
+            infoWindow<%= camera.id %>.open(map, marker<%= camera.id %>);
+            currentInfoWindow = infoWindow<%= camera.id %>
+          });
+        <% end %>
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGQi4aHVVxz92M4Ptdi0a9RDvYUcIZjq8&callback=initMap"
