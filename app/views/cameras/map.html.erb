@@ -1,0 +1,15 @@
+<div class="row bg-light flex-fill d-flex justify-content-start" style="margin-left: 0px; margin-right: 0px;">
+  <div class="col portlet-container portlet-dropzone" style="padding-left: 0px; padding-right: 0px;">
+    <div id="map" style="height: 100% !important; width: 100% !important;"></div>
+    <script>
+      var map;
+      function initMap() {
+        var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 10, center: {lat: -8.0574874, lng: -34.890126}});
+        // var marker = new google.maps.Marker({position: camera_position, map: map});
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGQi4aHVVxz92M4Ptdi0a9RDvYUcIZjq8&callback=initMap"
+    async defer></script>
+  </div>
+</div>

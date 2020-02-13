@@ -13,6 +13,11 @@ class CamerasController < ApplicationController
     @cameras_other = Camera.all.select { |camera| !camera.users.find_by(id: current_user.id) }
   end
 
+  def map
+    @cameras_user = current_user.cameras
+    @cameras_other = Camera.all.select { |camera| !camera.users.find_by(id: current_user.id) }
+  end
+
   def create
     camera = Camera.find(params[:camera_id])
     if camera.nil?
@@ -29,5 +34,9 @@ class CamerasController < ApplicationController
     UserCamera.destroy_by(user_id: current_user.id, camera_id: params[:id])
     flash[:notice] = "You have stop tracking #{camera.name}"
     redirect_to cameras_list_path
+  end
+
+  def show
+    @camera = Camera.find(params[:id])
   end
 end

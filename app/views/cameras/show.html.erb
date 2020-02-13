@@ -1,0 +1,52 @@
+<script type="text/javascript">
+  function loadImages() {
+    var imgDivs = document.getElementsByClassName("box-camera");
+    for (var i=0; i<imgDivs.length; i++) {
+      var loadingImg = new Image();
+      var downloadingImage = new Image();
+      loadingImg.className = "loadingImg";
+      loadingImg.src = "<%= asset_path 'loading.gif' %>";
+      imgDivs[i].insertAdjacentElement("afterbegin", loadingImg);
+      downloadingImage.changingDiv = imgDivs[i];
+
+      downloadingImage.onload = function () {
+        this.changingDiv.innerHTML = "";
+        this.changingDiv.append(this);
+      };
+
+      downloadingImage.src = imgDivs[i].dataset.camera_url;
+    }
+  }
+  window.onload = function() {
+    loadImages();
+    setInterval(loadImages,5*60*1000);
+  }
+</script>
+
+<div class="row" align="center">
+  <div class="col-md">
+    <h1><%= @camera.name %></h1>
+  </div>
+</div>
+<div class="row" align="center">
+  <div class="col-md-8 offset-md-2 box-camera" data-camera_url="<%= @camera.url %>">
+    <%= image_tag 'black.png' %>
+  </div>
+</div>
+<div class="row" align="center">
+  <div class="col-md-8 offset-md-2">
+    <h2>Location</h2>
+      <div id="map" class="img-fluid"></div>
+      <script>
+        var map;
+        function initMap() {
+          var camera_position = {lat: <%= @camera.latitude %>, lng: <%= @camera.longitude %>};
+          var map = new google.maps.Map(
+              document.getElementById('map'), {zoom: 15, center: camera_position});
+          var marker = new google.maps.Marker({position: camera_position, map: map});
+        }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGQi4aHVVxz92M4Ptdi0a9RDvYUcIZjq8&callback=initMap"
+      async defer></script>
+    </div>
+</div>

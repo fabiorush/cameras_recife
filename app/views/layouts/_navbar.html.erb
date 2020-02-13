@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #717D8E">
-  <%= link_to 'Cameras Recife Improved', root_path, class: "navbar-brand", data: { turbolinks: false } %>
+  <%= link_to 'Cameras Recife Improved', root_path, class: "navbar-brand", data: {turbolinks: false} %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -8,7 +8,10 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item <%= 'active' if current_page? controller: 'cameras', action: 'index' %>">
-          <%= link_to 'Dashboard', cameras_path, class: "nav-link", data: { turbolinks: false } %>
+          <%= link_to 'Dashboard', cameras_path, class: "nav-link", data: {turbolinks: false} %>
+        </li>
+        <li class="nav-item <%= 'active' if current_page? controller: 'cameras', action: 'map' %>">
+          <%= link_to 'Map', cameras_map_path, class: "nav-link", data: {turbolinks: false} %>
         </li>
         <li class="nav-item <%= 'active' if current_page? controller: 'cameras', action: 'list' %>">
           <%= link_to 'List', cameras_list_path, class: "nav-link" %>

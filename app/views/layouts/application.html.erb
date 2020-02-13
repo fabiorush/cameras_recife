@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html style="<%= 'height: 100%;' if current_page? controller: 'cameras', action: 'map' %>">
   <head>
     <title>CamerasRecife</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,11 +11,16 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body data-no-turbolink>
-    <%= render 'layouts/navbar' %>
-    <div class="container">
-      <%= render 'layouts/messages' %>
-      <%= yield %>
-    </div>
+  <body data-no-turbolink style="<%= 'height: 100%;' if current_page? controller: 'cameras', action: 'map' %>">
+    <% if current_page? controller: 'cameras', action: 'map' %>
+      <div class="container-fluid d-flex h-100 flex-column" style="padding-left: 0; padding-right: 0;">
+        <%= render 'layouts/navbar' %>
+    <% else %>
+      <%= render 'layouts/navbar' %>
+      <div class="container">
+        <%= render 'layouts/messages' %>
+    <% end %>
+        <%= yield %>
+      </div>
   </body>
 </html>

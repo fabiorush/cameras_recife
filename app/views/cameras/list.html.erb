@@ -15,7 +15,7 @@
         </tr>
         <% @cameras_user.each do |camera| %>
           <tr>
-            <td><%= camera.name %></td>
+            <td><%= link_to camera.name, camera_path(camera), data: {turbolinks: false} %></td>
             <td><%= "Latitude: #{camera.latitude}, Longitude: #{camera.longitude}" %></td>
             <td><%= link_to 'Delete', camera_path(camera), class: "btn btn-danger btn-camera", method: :delete %></td>
           </tr>
@@ -27,7 +27,7 @@
         </tr>
         <% @cameras_other.each do |camera| %>
           <tr>
-            <td><%= camera.name %></td>
+            <td><%= link_to camera.name, camera_path(camera), data: {turbolinks: false} %></td>
             <td><%= "Latitude: #{camera.latitude}, Longitude: #{camera.longitude}" %></td>
             <td><%= link_to 'Add', cameras_path(camera_id: camera), class: "btn btn-primary btn-camera", method: :post %></td>
           </tr>
