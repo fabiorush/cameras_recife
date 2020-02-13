@@ -9,25 +9,29 @@
       </tr>
     </thead>
     <tbody>
+      <% unless @cameras_user.empty? %>
         <tr>
           <td colspan="3"><h4 align="center">Your tracked cameras</h4></td>
         </tr>
-      <% @cameras_user.each do |camera| %>
-        <tr>
-          <td><%= camera.name %></td>
-          <td><%= "Latitude: #{camera.latitude}, Longitude: #{camera.longitude}" %></td>
-          <td><%= link_to 'Delete', camera_path(camera), class: "btn btn-danger btn-camera", method: :delete %></td>
-        </tr>
+        <% @cameras_user.each do |camera| %>
+          <tr>
+            <td><%= camera.name %></td>
+            <td><%= "Latitude: #{camera.latitude}, Longitude: #{camera.longitude}" %></td>
+            <td><%= link_to 'Delete', camera_path(camera), class: "btn btn-danger btn-camera", method: :delete %></td>
+          </tr>
+        <% end %>
       <% end %>
+      <% unless @cameras_other.empty? %>
         <tr>
           <td colspan="3"><h4 align="center">List of all cameras</h4></td>
         </tr>
-      <% @cameras_other.each do |camera| %>
-        <tr>
-          <td><%= camera.name %></td>
-          <td><%= "Latitude: #{camera.latitude}, Longitude: #{camera.longitude}" %></td>
-          <td><%= link_to 'Add', cameras_path(camera_id: camera), class: "btn btn-primary btn-camera", method: :post %></td>
-        </tr>
+        <% @cameras_other.each do |camera| %>
+          <tr>
+            <td><%= camera.name %></td>
+            <td><%= "Latitude: #{camera.latitude}, Longitude: #{camera.longitude}" %></td>
+            <td><%= link_to 'Add', cameras_path(camera_id: camera), class: "btn btn-primary btn-camera", method: :post %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

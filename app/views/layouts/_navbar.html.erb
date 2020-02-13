@@ -6,12 +6,14 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <%= link_to 'Dashboard', cameras_path, class: "nav-link", data: { turbolinks: false } %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'List', cameras_list_path, class: "nav-link" %>
-      </li>
+      <% if user_signed_in? %>
+        <li class="nav-item <%= 'active' if current_page? controller: 'cameras', action: 'index' %>">
+          <%= link_to 'Dashboard', cameras_path, class: "nav-link", data: { turbolinks: false } %>
+        </li>
+        <li class="nav-item <%= 'active' if current_page? controller: 'cameras', action: 'list' %>">
+          <%= link_to 'List', cameras_list_path, class: "nav-link" %>
+        </li>
+      <% end %>
       <!--li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown
@@ -28,8 +30,19 @@
       </li-->
     </ul>
     <ul class="navbar-nav mr-right">
-      <li class="nav-item ">
-        <%= link_to 'Logout', destroy_user_session_path, class: 'nav-link' %>
-      </li>
+      <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.email %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'Log out', destroy_user_session_path, class: 'dropdown-item' %>
+          </div>
+        </li>
+      <% else %>
+        <li class="nav-item ">
+          <%= link_to 'Sign in', user_google_oauth2_omniauth_authorize_path, class: 'nav-link' %>
+        </li>
+      <% end %>
   </div>
 </nav>
