@@ -13,7 +13,8 @@ class Camera < ApplicationRecord
         nil
       else
         cap = match.captures
-        [[:latitude, cap[0]], [:longitude, cap[1]], [:ip, cap[2]], [:name, cap[3].force_encoding("utf-8")]].to_h
+        [[:latitude, cap[0]], [:longitude, cap[1]], [:ip, cap[2]], [:name, cap[3].force_encoding("utf-8")
+                                        .encode("utf-8", :invalid => :replace, :undef => :replace)]].to_h
       end
     end.select { |x| x }
   end
