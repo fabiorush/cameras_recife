@@ -28,7 +28,7 @@
           var marker = new google.maps.Marker({position: camera_position, map: map});
         }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-eoB-bcsq2ycJtaMLTMdMvm8Vxzn17B0&callback=initMap"
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap"
       async defer></script>
     </div>
 </div>
