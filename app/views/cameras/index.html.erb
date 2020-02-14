@@ -1,28 +1,4 @@
-<script type="text/javascript">
-  function loadImages() {
-    var imgDivs = document.getElementsByClassName("box-camera");
-    for (var i=0; i<imgDivs.length; i++) {
-      var loadingImg = new Image();
-      var downloadingImage = new Image();
-      loadingImg.className = "loadingImg";
-      loadingImg.src = "<%= asset_path 'loading.gif' %>";
-      imgDivs[i].insertAdjacentElement("afterbegin", loadingImg);
-      downloadingImage.changingDiv = imgDivs[i];
-
-      downloadingImage.onload = function () {
-        this.changingDiv.innerHTML = "";
-        this.changingDiv.append(this);
-      };
-
-      downloadingImage.src = imgDivs[i].dataset.camera_url;
-    }
-  }
-  window.onload = function() {
-    loadImages();
-    setInterval(loadImages,5*60*1000);
-  }
-</script>
-
+<%= render 'load_images' %>
 <h1 align="center">Your camera list</h1>
 <div class="row">
   <% @cameras.each do |camera| %>

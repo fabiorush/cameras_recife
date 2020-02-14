@@ -1,28 +1,4 @@
-<script type="text/javascript">
-  function loadImages() {
-    var imgDivs = document.getElementsByClassName("box-camera");
-    for (var i=0; i<imgDivs.length; i++) {
-      var loadingImg = new Image();
-      var downloadingImage = new Image();
-      loadingImg.className = "loadingImg";
-      loadingImg.src = "<%= asset_path 'loading.gif' %>";
-      imgDivs[i].insertAdjacentElement("afterbegin", loadingImg);
-      downloadingImage.changingDiv = imgDivs[i];
-
-      downloadingImage.onload = function () {
-        this.changingDiv.innerHTML = "";
-        this.changingDiv.append(this);
-      };
-
-      downloadingImage.src = imgDivs[i].dataset.camera_url;
-    }
-  }
-  window.onload = function() {
-    loadImages();
-    setInterval(loadImages,5*60*1000);
-  }
-</script>
-
+<%= render 'load_images' %>
 <div class="row" align="center">
   <div class="col-md">
     <h1><%= @camera.name %></h1>
@@ -46,7 +22,7 @@
           var marker = new google.maps.Marker({position: camera_position, map: map});
         }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGQi4aHVVxz92M4Ptdi0a9RDvYUcIZjq8&callback=initMap"
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-eoB-bcsq2ycJtaMLTMdMvm8Vxzn17B0&callback=initMap"
       async defer></script>
     </div>
 </div>
