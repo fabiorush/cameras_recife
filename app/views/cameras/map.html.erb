@@ -1,3 +1,4 @@
+<%= render 'load_images' %>
 <div class="row bg-light flex-fill d-flex justify-content-start" style="margin-left: 0px; margin-right: 0px;">
   <div class="col portlet-container portlet-dropzone" style="padding-left: 0px; padding-right: 0px;">
     <div id="map" style="height: 100% !important; width: 100% !important;"></div>
@@ -7,18 +8,11 @@
         var map = new google.maps.Map(
             document.getElementById('map'), {zoom: 13, center: {lat: -8.0744874, lng: -34.890126}});
         var currentInfoWindow;
-        <% @cameras.each do |camera| %>
-          var marker<%= camera.id %> = new google.maps.Marker({position: {lat: <%= camera.latitude %>, lng: <%= camera.longitude %>}, map: map, title: "<%= camera.name %>"});
-          var infoWindow<%= camera.id %> = new google.maps.InfoWindow({
-              content: "<p><%= camera.name %></p>"
-          });
-          marker<%= camera.id %>.addListener('click', function () {
-            if (currentInfoWindow) {
-              currentInfoWindow.close()
-            }
-            infoWindow<%= camera.id %>.open(map, marker<%= camera.id %>);
-            currentInfoWindow = infoWindow<%= camera.id %>
-          });
+        <% @cameras_user.each do |camera| %>
+          <%= render partial: 'set_marker', locals: {camera: camera, user: true} %>
+        <% end %>
+        <% @cameras_other.each do |camera| %>
+          <%= render partial: 'set_marker', locals: {camera: camera, user: false} %>
         <% end %>
       }
     </script>

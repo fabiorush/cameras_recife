@@ -1,4 +1,10 @@
 <%= render 'load_images' %>
+<script type="text/javascript">
+  window.onload = function() {
+    loadImages();
+    setInterval(loadImages,5*60*1000);
+  }
+</script>
 <div class="row" align="center">
   <div class="col-md">
     <h1><%= @camera.name %></h1>

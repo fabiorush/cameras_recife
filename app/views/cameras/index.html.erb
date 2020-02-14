@@ -1,5 +1,11 @@
 <%= render 'load_images' %>
-<h1 align="center">Your camera list</h1>
+<script type="text/javascript">
+  window.onload = function() {
+    loadImages();
+    setInterval(loadImages,5*60*1000);
+  }
+</script>
+<h1 align="center">Dashboard</h1>
 <div class="row">
   <% @cameras.each do |camera| %>
     <div class="col-md-6 box-camera" data-camera_url="<%= camera.url %>">

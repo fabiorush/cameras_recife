@@ -3,14 +3,13 @@
     var imgDivs = document.getElementsByClassName("box-camera");
     for (var i=0; i<imgDivs.length; i++) {
       var loadingImg = new Image();
-      var downloadingImage = document.getElementById("camera_" + imgDivs[i].dataset.camera_url);
+      var downloadingImage = imgDivs[i].getElementsByClassName("loadingImg")[0];
       if (downloadingImage) {
         downloadingImage.remove();
       }
       downloadingImage = new Image();
       loadingImg.className = "loadingImg";
       loadingImg.src = "<%= asset_path 'loading.gif' %>";
-      loadingImg.id = "camera_" + imgDivs[i].dataset.camera_url;
       imgDivs[i].insertAdjacentElement("afterbegin", loadingImg);
       downloadingImage.changingDiv = imgDivs[i];
 
@@ -20,14 +19,10 @@
       };
 
       downloadingImage.onerror = function() {
-        loadingImg.src = "<%= asset_path 'mark-icon-51-128x128.png' %>";
+        this.changingDiv.getElementsByClassName("loadingImg")[0].src = "<%= asset_path 'mark-icon-51-128x128.png' %>";
       };
 
       downloadingImage.src = imgDivs[i].dataset.camera_url;
     }
-  }
-  window.onload = function() {
-    loadImages();
-    setInterval(loadImages,5*60*1000);
   }
 </script>
