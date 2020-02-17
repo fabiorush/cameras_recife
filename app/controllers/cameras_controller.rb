@@ -38,5 +38,6 @@ class CamerasController < ApplicationController
 
   def show
     @camera = Camera.find(params[:id])
+    @can_add = @camera.users.find_by(id: current_user.id).nil?
   end
 end

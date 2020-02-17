@@ -32,3 +32,12 @@
       async defer></script>
     </div>
 </div>
+<div class="row map-show" align="center">
+  <div class="col-md-2 offset-md-5">
+    <% if @can_add %>
+      <td><%= link_to 'Add', cameras_path(camera_id: @camera), class: "btn btn-primary btn-camera", method: :post %></td>
+    <% else %>
+      <td><%= link_to 'Delete', camera_path(@camera), class: "btn btn-danger btn-camera", method: :delete %></td>
+    <% end %>
+  </div>
+</div>
