@@ -1,12 +1,29 @@
 <%= render 'load_images' %>
 <script type="text/javascript">
+  var targetBox;
+
   window.onload = function() {
     loadImages();
     setInterval(loadImages,5*60*1000);
   }
+  $(function(){
+    $('#dashboard').gridstrap({
+      /* options here */
+    });
+    $('#dashboard').on('celldrag',function (e) {
+      targetBox = e.target;
+    });
+    $('#dashboard').on('cellredraw',function (e) {
+      console.log(targetBox == e.target);
+    });
+  });
+
+  function myFunction(e) {
+    console.log("teste");
+  }
 </script>
 <h1 align="center">Dashboard</h1>
-<div class="row">
+<div id="dashboard" class="row">
   <% @cameras.each do |camera| %>
     <div class="col-md-6 box-camera" data-camera_url="<%= camera.url %>">
       <%= image_tag 'black.png' %>
