@@ -1,6 +1,12 @@
 <%= render 'load_images' %>
 <script type="text/javascript">
-  var targetBox;
+  var mouseDown = 0;
+  document.body.onmousedown = function() {
+    ++mouseDown;
+  }
+  document.body.onmouseup = function() {
+    --mouseDown;
+  }
 
   window.onload = function() {
     loadImages();
@@ -8,24 +14,22 @@
   }
   $(function(){
     $('#dashboard').gridstrap({
-      /* options here */
     });
-    $('#dashboard').on('celldrag',function (e) {
-      targetBox = e.target;
-    });
+
     $('#dashboard').on('cellredraw',function (e) {
-      console.log(targetBox == e.target);
+      if (mouseDown == 0) {
+        var cameras = $(".gridstrap-cell-hidden");
+        for (var i=0; i<cameras.length; i++) {
+          console.log("Resize: " + cameras[i].dataset.camera_id);
+        }
+      }
     });
   });
-
-  function myFunction(e) {
-    console.log("teste");
-  }
 </script>
 <h1 align="center">Dashboard</h1>
 <div id="dashboard" class="row">
   <% @cameras.each do |camera| %>
-    <div class="col-md-6 box-camera" data-camera_url="<%= camera.url %>">
+    <div class="col-md-6 box-camera" data-camera_id="<%= camera.id %>" data-camera_url="<%= camera.url %>">
       <%= image_tag 'black.png' %>
     </div>
   <% end %>
